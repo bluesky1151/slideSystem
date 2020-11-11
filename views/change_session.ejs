@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="/javascripts/make_ses.js"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="content">
+        <div class="text-image" id="header">
+          <img src="/images/presenter.png"/>
+          <h1 class="centerText"><%= title %></h1>
+        </div>
+        <div class="twoColumn">
+          <div class="leftColumn">
+            <!--左カラム-->
+            <p>ようこそ<%= data.name%>さん</p>
+            <p><a href="logout" class="link-button">ログアウト</a></p>
+          </div>
+          <div class="centerBar"></div>
+          <div class="rightColumn">
+            <!--右カラム-->
+            <form method="POST" id="makeForm" enctype="multipart/form-data">
+              <table border="1" class="normal">
+                <tr>
+                  <th>講義名<error>*</error></th>
+                  <td><input required type="text" name="title" class="full-text" placeholder="例: アプリケーションの作り方"></td>
+                </tr>
+                <tr>
+                  <th>ページ範囲<error>*</error></th>
+                  <td><input required type="number" min="1" value="1" name="p1" width="20%"> - <input type="number" min="1" value="2" name="p2" width="20%"></td>
+                </tr>
+                <tr>
+                  <th>
+                    <p class="tooltip" title="スライドはPDFのみ対応しています。PDFで出力してください。">スライド(PDF)<error>*</error></p>
+                  </th>
+                  <td>
+                    <input type="file" id="file" name="file" required accept="application/pdf">
+                  </td>
+                </tr>
+                <tr>
+                  <th>関連資料</th>
+                  <td>
+                    <p>HTMLタグは使えません.</p>
+                    <textarea name="relSorce" class="full" placeholder="関連資料, 参考文献はこちらに記載してください.HTMLタグは使えません."></textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <td><button class="link-button" width="100%">登録</button></td>
+                </tr>
+              </table>
+            </form>
+            <p><a href="./" title="戻る" class="link-button">戻る</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

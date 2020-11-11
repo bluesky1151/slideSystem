@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/javascripts/scroll.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script src="/javascripts/edit_area/edit_area_full.js"></script>
+    <script src="/javascripts/pdf.js"></script>
+    <script>
+        let url = "<%= url%>";
+        let sesId = "<%= data.id%>";
+    </script>
+    <script src="/javascripts/edit_ses.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h1>基本情報</h1>
+    <form method="POST">
+        <a href="../" class="link-button">戻る</a>
+        <table class="normal" border="1">
+            <tr>
+                <th>セッションID</th>
+                <td><p><%= data.id%></p></td>
+            </tr>
+            <tr>
+                <th>講義名</th>
+                <td><input required type="text" name="title" value="<%= data.title%>"></td>
+            </tr>
+            <tr>
+                <th>講師</th>
+                <td><p><%= uid%></p></td>
+            </tr>
+            <tr>
+                <th>ページ範囲</th>
+                <td><input required type="text" name="p" value="<%= data.page%>"></td>
+            </tr>
+            <tr>
+                <th>関連資料</th>
+                <td>
+                    <p>HTMLタグは使用できません</p>
+                    <textarea class="full" name="viewDoc" placeholder="関連資料, 参考文献はこちらに記載してください.HTMLタグは使えません."><%- data.viewDoc%></textarea>
+                </td>
+            </tr>
+        </table>
+        <a href="../" class="link-button">戻る</a><button class="link-button">送信</button>
+        <h1>添付データ　スライド確認</h1>
+        <table border="1" class="normal" id="slidelist" width="90%">
+            <tr>
+                <th>ページ番号</th>
+                <th>スライド</th>
+                <th>添付データ</th>
+            </tr>
+        </table>
+        <input type="hidden" id="max_data" name="max_data" value="0">
+        <a href="../" class="link-button">戻る</a><button class="link-button">送信</button>
+    </form>
+  </body>
+</html>

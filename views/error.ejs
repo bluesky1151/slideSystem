@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= error.status %> <%= message %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="content">
+        <a href="./">
+            <div class="text-image" id="header">
+            <img src="/images/presenter.png"/>
+            <h1 class="centerText"><%= error.status %> <%= message %></h1>
+            </div>
+        </a>
+        <div class="twoColumn">
+          <div class="leftColumn">
+            <!--左カラム-->
+            <p><a href="./login" title="ログイン" class="link-button">ログイン</a></p>
+            <p><a href="./regist" title="新規登録" class="link-button">新規登録</a></p>
+            <p><a href="./init" title="初期設定" class="link-button">初期設定</a></p>
+          </div>
+          <div class="centerBar"></div>
+          <div class="rightColumn">
+            <!--右カラム-->
+            <h1><%= message %></h1>
+            <h2><%= error.status %></h2>
+            <pre><%= error.stack %></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

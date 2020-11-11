@@ -1,0 +1,244 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('slide:server');
+var http = require('http');
+var mysql = require('mysql');
+
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '80');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+//設定読み込み
+let sqlSetting = require("../mysql");
+let mysql_setting = sqlSetting;
+
+let connection = mysql.createConnection(mysql_setting);
+
+
+
+//socket
+var io = require('socket.io')(server);
+io.on('connection', function(socket){
+  //console.log('connected!!!');
+
+  //セッション開催
+  socket.on('openSession', function(data){
+    //console.log(data);
+    connection.query('UPDATE session SET online=1 WHERE id=? and actor=?', [data.sesId, data.id], function(error, results, fields){
+      if(error){
+        console.log(error);
+      }
+    });
+  });
+
+  //視聴者参加
+  socket.on('join_view', async function(data){
+    connection.query('INSERT INTO joining (sesId, uId) VALUES (?, ?)', [data.sesId, data.id], function(error, results, fields){
+      connection.query('SELECT * FROM joining INNER JOIN account ON joining.uId=account.id WHERE sesId=?', [data.sesId], function(error, results, fields){
+        if(error){
+          console.log(error);
+        }else{
+          let returnData = {id: data.id, name: data.name, sesId: data.sesId, joining: results};
+          //console.log(returnData);
+          io.emit('join_view', returnData);
+        }
+      });
+    });
+  });
+
+  socket.on('join_view_all', function(data){
+    connection.query('SELECT * FROM joining INNER JOIN account ON joining.uId=account.id WHERE sesId=?', [data.sesId], function(error, results, fields){
+      if(error){
+        console.log(error);
+      }else{
+        let returnData = {id: data.id, name: data.name, sesId: data.sesId, joining: results};
+        //console.log(returnData);
+        io.emit('join_view', returnData);
+      }
+    });
+  });
+
+  //演習中か
+  socket.on('isdoExe', function(data){
+    io.emit('isdoExe', data);
+  });
+  socket.on('doExe2Viewer', function(data){
+    io.emit('doExe2Viewer', data);
+  });
+
+  //講師参加
+  socket.on('join_actor', function(data){
+    io.emit('join2viewer', {sesId: data.sesId, actor: data.actor});
+  });
+
+  //ページ同期
+  socket.on('sync', function(data){
+    io.emit('sync2actor', data);
+  });
+  socket.on('sync2viewer', function(data){
+    //console.log(data);
+    io.emit('sync2viewer', data);
+  });
+
+  //参加者同期
+  socket.on('sync_viewer', function(data){
+    //console.log(data);
+    io.emit('sync_viewer', data);
+  });
+
+  //ページ送信
+  socket.on('actor_data', function(data){
+    //console.log(data);
+    let returnData = {id: data.id, page: data.page, user: data.user, sesId: data.sesId};
+    io.emit('actor2viewer', returnData);
+  });
+
+  //演習開始
+  socket.on('StartExe', function(data){
+    io.emit('StartExe', data);
+  });
+
+  //演習終了
+  socket.on('EndExe', function(data){
+    io.emit('EndExe', data);
+  });
+
+  //ユーザ切断
+  socket.on('disconnect_user', function(data){
+    connection.query('DELETE FROM joining WHERE uId=?', [data.id]);
+    io.emit('actor2dissconnect', {id: data.id, sesId: data.sesId});
+  });
+
+  //講師切断
+  socket.on('disconnect_actor', async function(data){
+    //console.log(data);
+    connection.query('UPDATE session SET online=0 WHERE id=? and actor=?',[data.sesId, data.id], function(error, results, fields){
+      if(error){
+        console.log(error);
+      }else{
+        io.emit('session_end', {sesId: data.sesId})
+      };
+    });
+  });
+
+  //ブックマーク
+  socket.on('addBookmark', async function(data){
+    await connection.query('INSERT INTO bookmark (sesId,page,user) VALUES (?,?,?)',[data.sesId, data.page, data.uid], function(error, results, fields){
+      if(error){
+        console.log(error);
+      }
+    });
+  });
+
+  //ブックマーク解除
+  socket.on('deleteBookmark', async function(data){
+    await connection.query('DELETE FROM bookmark WHERE id=? and user=?', [data.id, data.uid], function(error, results, fields){
+      if(error){
+        console.log(error);
+      }
+    });
+  });
+
+  //エモート
+  socket.on('emote', function(data){
+    io.emit('emote2all', data);
+  });
+  socket.on('status', function(data){
+    io.emit('status2all', data);
+  });
+  socket.on('deleteStatus', function(data){
+    //console.log(data);
+    io.emit('deleteStatus2all', data);
+  });
+
+  //切断処理
+  socket.on('disconnect', function(){
+    console.log('disconnected');
+  });
+});
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+async function onlineChange(num, sesId, actor){
+  let connection = mysql.createConnection(mysql_setting);
+  return await connection.query('UPDATE session SET online=? WHERE id=? and actor=?', [num, sesId, actor]);
+}

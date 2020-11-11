@@ -1,0 +1,142 @@
+/* セッション視聴側 */
+*{
+    margin: 0; padding: 0;
+}
+body{
+    overflow: hidden;
+}
+
+/* ライン配置 */
+
+div.line0{
+    width: 100%; height: 5vh;
+    color: white;
+    background-color: orangered;
+    display: flex;
+}
+div.line0 a{
+    position: absolute;
+    right: 0px;
+    font-size: larger;
+}
+div.line1{
+    width: 100%; height: 60vh;
+    display: flex;
+    background-color: black;
+}
+div.Slide{
+    width: 60%;
+    height: 100%;
+}
+div.Slide canvas{
+    width: 100%; height: 100%;
+}
+div.SourceViewer{
+    width: 40%; 
+    height: 100%;
+    text-align: center;
+}
+div.SourceViewer pre{
+    height: 90%;
+}
+div.SourceViewer code{
+    height: 100%;
+    text-align: left;
+    overflow: auto;
+}
+div.ProgressLine{
+    margin: 0; padding: 0;
+    width: 100%;
+    background-color: black;
+}
+div.ProgressLine progress{
+    margin: 0; padding: 0;
+    width: 100%; height: 1vh;
+}
+div.line2{
+    width: 100%; height: 34vh;
+    display: flex;
+    background-color: dimgray;
+}
+div.action{
+    width: 34%;
+    color: white;
+}
+div.document{
+    border-style: solid;
+    overflow: auto;
+    background-color: white;
+    width: 33%;
+}
+div.anything{
+    width: 33%;
+    text-align: center;
+    background-color: dimgray;
+    overflow: auto;
+    color: white;
+}
+div.viewing{
+    width: 100%;
+    text-align: center;
+}
+.viewing table{
+    width: 100%; border-color: white;
+}
+div.bookmarking{
+    width: 100%;
+    text-align: center;
+}
+div.bookmarking table{
+    width: 100%; border-color: white;
+}
+
+/* 装飾 */
+.link-button{
+    position: relative;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: white;
+    background-color: orange;
+    border-bottom: orangered;
+    border-radius: 10px;
+    font-weight: bold;
+    border-style: none;
+  }
+.link-button:active{
+    border-style: none;
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+.link-button:hover{
+    border-style: none;
+    background-color: violet;
+  }
+.anything_button_on{
+    width: 50%;
+    position: sticky;
+    top: 0px;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: cadetblue;
+    border-bottom: darkblue;
+    border-radius: 10 none 10 none;
+    font-weight: bold;
+    border-style: none;
+}
+.anything_button_off{
+    width: 50%;
+    position: sticky;
+    top: 0px;
+    display: inline-block;
+    text-decoration: none;
+    background-color: glay;
+    border-bottom: darkblue;
+    border-radius: 10 none 10 none;
+    font-weight: bold;
+    border-style: none;
+}
+canvas.thumbCanvas{
+    width: 100%;
+}

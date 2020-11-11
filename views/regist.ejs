@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="/javascripts/jquery.autoKana.js"></script>
+    <script src="/javascripts/regist_form.js"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="content">
+        <div class="text-image" id="header">
+          <img src="/images/presenter.png"/>
+          <h1 class="centerText"><%= title %></h1>
+        </div>
+        <div class="twoColumn">
+          <div class="leftColumn">
+            <!--左カラム-->
+            <p><a href="./login" title="ログイン" class="link-button">ログイン</a></p>
+            <p><a href="./regist" title="新規登録" class="link-button">新規登録</a></p>
+          </div>
+          <div class="centerBar"></div>
+          <div class="rightColumn">
+            <!--右カラム-->
+            <form method="post" action="regist">
+              <table border="1" class="normal">
+                <tr>
+                  <th>学籍番号<error>*</error></th>
+                  <td><input type="number" required placeholder="1721xxx" pattern="/[0-9]{7}/" name="id"></td>
+                </tr>
+                <tr>
+                  <th>名前<error>*</error></th>
+                  <td><input id="name" type="text" required placeholder="厚木次郎" name="name"></td>
+                </tr>
+                <tr>
+                  <th>フリガナ<error>*</error></th>
+                  <td><input id="furi" type="text" required placeholder="アツジジロウ" name="furi"></td>
+                </tr>
+                <tr>
+                  <th>パスワード<error>*</error></th>
+                  <td><input type="password" required name="password"></td>
+                </tr>
+                <tr>
+                  <th>パスワード確認<error>*</error></th>
+                  <td><input type="password" required name="password2"></td>
+                </tr>
+              </table>
+              <p><a href="./" title="戻る" class="link-button">戻る</a><button class="link-button">送信</button></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </body>
+</html>

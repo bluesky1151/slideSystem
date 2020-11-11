@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="content">
+        <div class="text-image" id="header">
+          <img src="/images/presenter.png"/>
+          <h1 class="centerText"><%= title %></h1>
+        </div>
+        <div class="twoColumn">
+          <div class="leftColumn">
+            <!--左カラム-->
+            <p>ようこそ<%= data.name%>さん</p>
+            <p><a href="logout" class="link-button">ログアウト</a></p>
+          </div>
+          <div class="centerBar"></div>
+          <div class="rightColumn">
+            <!--右カラム-->
+            <p><a href="./make_session" name="action" class="link-button">セッションの作成</a></p>
+            <div class="now">
+              <p>開催中のセッションはこちらです.</p>
+              <table border="1" class="normal">
+                <tr>
+                  <th>セッション名</th>
+                  <th>ページ</th>
+                  <th>講師</th>
+                  <th>参加</th>
+                </tr>
+                <% if(session_list){
+                for(const i in session_list){
+                %>
+                <tr>
+                  <td><%= session_list[i].session_name%></td>
+                  <td><%= session_list[i].page%></td>
+                  <td><%= session_list[i].name%></td>
+                  <td><a href="./session/view/<%= session_list[i].id%>" class="link-button">参加</a></td>  
+                </tr>
+                <% }
+                }else{ %>
+                  <tr>
+                    <td>開催中のセッションがありません</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                <%}%>
+              </table>
+          </div>
+          <div class="mysession">
+            <p>自分のセッションはこちらです.</p>
+            <table border="1" class="normal">
+              <tr>
+                <th>セッションID</th>
+                <th>セッション名</th>
+                <th>セッションURL</th>
+                <th>編集</th>
+                <th>開催</th>
+                <th>削除</th>
+              </tr>
+              <% if(mysession){
+                for(let i in mysession){
+              %>
+              <tr>
+                <td><%= mysession[i].id%></td>
+                <td><%= mysession[i].session_name%></td>
+                <td><a href="<%= url%>/users/session/view/<%= mysession[i].id%>"><%= url%>/users/session/view/<%= mysession[i].id%></a></td>
+                <td><a href="./edit/<%= mysession[i].id%>" class="link-button">編集</td>
+                <td><a href="./session/show/<%= mysession[i].id%>" class="link-button">開催</td>
+                <td><a href="./delete/<%= mysession[i].id%>" class="link-button" onclick="if(confirm('削除すると復旧できません. 本当に削除しますか？') == false) return false;">削除</a></td>
+              </tr>
+              <%}}else{%>
+                <td>セッションが存在しません</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              <%}%>
+            </table>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

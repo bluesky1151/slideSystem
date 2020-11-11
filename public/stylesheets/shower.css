@@ -1,0 +1,100 @@
+/* セッション視聴側 */
+*{
+    margin: 0; padding: 0;
+}
+body{
+    overflow: hidden;
+}
+/*ライン配置*/
+.line0{
+    background-color: turquoise;
+    width: 100%; height: 5vh;
+    color: white;
+    display: flex;
+}
+.line0 a{
+    position: absolute;
+    right: 0; font-size: larger;
+}
+.line1{
+    width: 100%; height: 60vh;
+    display: flex;
+    background-color: black;
+}
+.Slide{
+    width: 50%;
+}
+.Slide canvas{
+    width: 100%; height: 100%;
+}
+.SourceViewer{
+    height: 100%; width: 25%;
+    text-align: center;
+}
+.SourceViewer pre{
+    height: 93%;
+}
+.SourceViewer code{
+    text-align: left; margin: 0 auto;
+    height: 100%; width: 95%;
+}
+.joiner{
+    height: 100%; width: 25%;
+    text-align: center;
+    overflow: auto;
+    background-color: dimgray; color: white;
+}
+.joiner table{
+    width: 100%; border-color: white;
+}
+div.ProgressLine{
+    margin: 0; padding: 0;
+    width: 100%;
+    background-color: black;
+}
+div.ProgressLine progress{
+    margin: 0; padding: 0;
+    width: 100%; height: 1vh;
+}
+div.line2{
+    background-color: black; color: white;
+    width: 100%; height: 5vh;
+    display: flex;
+}
+div.line3{
+    width: 100%; height: 28vh;
+    display: flex;
+    background-color: dimgray;
+}
+.consoleBox{
+    color: white;
+    width: 50%; height: 100%;
+}
+.document{
+    overflow: auto;
+    width: 50%; height: 100%;
+    border-style: solid; background-color: white;
+}
+
+/* 装飾 */
+.link-button{
+    position: relative;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    color: white;
+    background-color: orange;
+    border-bottom: orangered;
+    border-radius: 10px;
+    font-weight: bold;
+    border-style: none;
+  }
+  .link-button:active{
+    border-style: none;
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+  }
+  .link-button:hover{
+    border-style: none;
+    background-color: violet;
+  }

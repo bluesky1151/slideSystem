@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title%></title>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/shower.css">
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="/stylesheets/highlight/a11y-dark.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+        <script src="/javascripts/pdf.js"></script>
+        <script>
+            //受け渡し
+            let url = "<%= url%>";
+            let sesId = "<%= sesId%>";
+            let viewDoc_text = "<%- viewDoc%>";
+            let uid = "<%- uData.id%>";
+        </script>
+        <script src="/javascripts/shower.js"></script>
+        <link rel="shortcut icon" href="/images/favicon.ico" />
+    </head>
+    <body>
+        <!--公開者側画面-->
+        <div class="line0">
+            <!--ヘッダー-->
+            <h1><%= title%></h1>
+            <span><a href="../../" class="link-button">戻る</a></span>
+        </div>
+        <div class="line1">
+            <div class="Slide">
+                <canvas id="the-canvas" style="border:1px solid black;"></canvas>
+            </div>
+            <div class="SourceViewer">
+                <pre class="sorce" style="text-align: left;"><code id="Sorce" ></code></pre><br>
+                <textarea id="Sorce2" style="display: none;"></textarea>
+                <button class="link-button" id="clipBoard" onclick="copyToClipboard()">クリップボードにコピー</button>
+            </div>
+            <div class="joiner">
+                <!--参加者一覧-->
+                <h1>参加中<button class="link-button" onclick="reloadViewer()">&#x1f504;</button></h1>
+                <hr>
+                <table border="1" id="joining">
+                </table>
+            </div>
+        </div>
+        <div class="ProgressLine"><progress id="pageProgress" value="1"></progress></div>
+        <div class="line2">
+            <!--操作ボタン-->
+            <p><span id="Changebutton"><button class="link-button" onclick="pageChange(1)">◀</button><button class="link-button" onclick="pageChange(2)">▶</button></span>　<span id="nowPage"></span> / <span id="maxPage"></span> <button class="link-button" onclick="reloadPDF()">スライドの更新</button></p>
+        </div>
+        <div class="line3">
+            <div class="consoleBox">
+                <!--コンソール-->
+                <p>コンソールボックス</p>
+                <div class="consoleBox2">
+                    <!--内容-->
+                    <button class="link-button" id="toOnline" onclick="Toonline()">セッション開催</button><button class="link-button" id="StartExe" onclick="StartExe()">演習開始</button>
+                </div>
+            </div>
+            <div class="document">
+                <p>関連資料</p>
+                <p id="viewDoc"></p>
+            </div>
+        </div>
+    </body>
+</html>

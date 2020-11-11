@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title%></title>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/session.css">
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="/stylesheets/highlight/a11y-dark.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+        <script src="/javascripts/pdf.js"></script>
+        <script>
+            let url = "<%= url%>";
+            let sesId = "<%= sesId%>";
+            let viewDoc_text = "<%- viewDoc%>"
+            let uid = "<%= uData.id%>";
+            let uname = "<%= uData.name%>";
+            let furi = "<%= uData.furi%>";
+        </script>
+        <script src="/javascripts/viewer.js"></script>
+        <link rel="shortcut icon" href="/images/favicon.ico" />
+    </head>
+    <body>
+        <div id="header_" class="line0">
+            <!--ヘッダ-->
+            <h1><%= title%></h1>
+            <span><a href="../../" class="link-button">戻る</a></span>
+        </div>
+        <div class="line1">
+            <div class="Slide">
+                <canvas id="the-canvas" style="border:1px solid black;"></canvas>
+            </div>
+            <div class="SourceViewer">
+                <pre class="sorce" style="text-align: left;"><code id="Sorce" ></code></pre><br>
+                <textarea id="Sorce2" style="display: none;"></textarea>
+                <button class="link-button" width="100%" id="clipBoard" onclick="copyToClipboard()">クリップボードにコピー</button>
+            </div>
+        </div>
+        <div class="ProgressLine">
+            <progress id="pageProg" value="0"></progress>
+        </div>
+        <div class="line2">
+            <div class="action">
+                <p><span id="Changebutton" style="display: none;"><button class="link-button" onclick="pageChange(1)">◀</button><button class="link-button" onclick="pageChange(2)">▶</button></span><span id="nowPage"> 1 </span> / <span id="maxPage"> 1 </span> <button class="link-button" onclick="reloadPDF()">スライドの更新</button></p> 
+                リアクション<br>
+                <button class="link-button" onclick="bookmark()">ブックマーク</button><br>
+                <div>
+                    <button class="link-button" onclick="emote(0)" title="グッド">👍</button><button class="link-button" onclick="emote(1)" title="バッド">👎</button><br>
+                    <button class="link-button" onclick="status(0)">演習完了報告</button><button class="link-button" onclick="status(1)">HELP</button><button class="link-button" onclick="status(2)">待った！</button><button class="link-button" onclick="status(3)" title="挙手">挙手</button><br>
+                    <button class="link-button" onclick="status(4)">ステータス解除</button>
+                </div>
+                <br>
+            </div>
+            <div class="document">
+                <p>関連資料</p>
+                <p id="viewDoc"></p>
+            </div>
+            <div class="anything">
+                <button class="anything_button_on" id="viewing_tab" onclick="changeTabs(1)">参加者</button><button id="bookmark_tab" class="anything_button_off" onclick="changeTabs(2)">ブックマークリスト</button>
+                <div class="viewing" id="viewing">
+                    <!--参加者-->
+                    <h1>参加中</h1>
+                    <hr>
+                    <table border="1" id="joining">
+                    </table>
+                </div>
+                <div class="bookmarking" id="bookmarking" style="display: none;">
+                    <!--ブックマーク-->
+                    <h1>ブックマーク<button class="link-button" onclick="bookmarking()">&#x1f504;</button></h1>
+                    <table border="1" id="bookmarking_list">
+                        <tr>
+                            <th>No.</th>
+                            <th>ページ</th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
