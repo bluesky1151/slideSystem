@@ -13,9 +13,12 @@ require('date-utils');
 //関数
 let title = '輪講支援システム';
 
-//設定読み込み
-let sqlSetting = require("../mysql");
-let mysql_setting = sqlSetting;
+let mysql_setting = {
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'slide'
+};
 
 /* GET home page. */
 router.get('/', isNotLogined ,function(req, res, next) {
@@ -35,8 +38,8 @@ router.get('/init', async function(req, res, next){
   //CREATE TABLE IF NOT EXISTS session (id VARCHAR(256) NOT NULL,session_name MEDIUMTEXT NOT NULL, actor VARCHAR(256) NOT NULL, online TINYINT(1) DEFAULT '0' NOT NULL, PRIMARY KEY(id), UNIQUE(id))
   
   //アカウントテーブル
-  let row1 = await querySQL('CREATE TABLE IF NOT EXISTS account (id VARCHAR(256) NOT NULL, name VARCHAR(256) NOT NULL,furi VARCHAR(256), password VARCHAR(256) NOT NULL, PRIMARY KEY(id), UNIQUE(id))');
-  let row2 = await querySQL("CREATE TABLE IF NOT EXISTS session (id VARCHAR(256) NOT NULL, session_name MEDIUMTEXT NOT NULL, actor VARCHAR(256) NOT NULL,path VARCHAR(256) NOT NULL DEFAULT '/slide/test.pdf', page VARCHAR(256) DEFAULT NULL, viewDoc LONGTEXT NULL, online TINYINT(1) DEFAULT '0' NOT NULL, PRIMARY KEY(id), UNIQUE(id))");
+  let row1 = await querySQL('CREATE TABLE IF NOT EXISTS account (id VARCHAR(10) NOT NULL, name VARCHAR(256) NOT NULL,furi VARCHAR(256), password VARCHAR(256) NOT NULL, PRIMARY KEY(id), UNIQUE(id))');
+  let row2 = await querySQL("CREATE TABLE IF NOT EXISTS session (id VARCHAR(100) NOT NULL, session_name MEDIUMTEXT NOT NULL, actor VARCHAR(256) NOT NULL,path VARCHAR(256) NOT NULL DEFAULT '/slide/test.pdf', page VARCHAR(256) DEFAULT NULL, viewDoc LONGTEXT NULL, online TINYINT(1) DEFAULT '0' NOT NULL, PRIMARY KEY(id), UNIQUE(id))");
   let row3 = await querySQL('CREATE TABLE IF NOT EXISTS session_rel (id INT(11) NOT NULL AUTO_INCREMENT, sesId VARCHAR(256) NOT NULL, page INT(11) NOT NULL, content LONGTEXT NOT NULL, PRIMARY KEY(id))');
   let row4 = await querySQL('CREATE TABLE IF NOT EXISTS bookmark (id INT(11) NOT NULL AUTO_INCREMENT, sesId VARCHAR(256) NOT NULL, page INT(11) NOT NULL, user VARCHAR(256) NOT NULL, PRIMARY KEY(id))');
   let row5 = await querySQL('CREATE TABLE IF NOT EXISTS joining (id INT(11) NOT NULL AUTO_INCREMENT, sesId longtext NOT NULL, uId INT(11) NOT NULL, PRIMARY KEY(id))');
