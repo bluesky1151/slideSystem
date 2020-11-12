@@ -2,14 +2,14 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <link rel='stylesheet' href='./stylesheets/style.css' />
+    <link rel="shortcut icon" href="./images/favicon.ico" />
   </head>
   <body>
     <div class="wrap">
       <div class="content">
         <div class="text-image" id="header">
-          <img src="/images/presenter.png"/>
+          <img src="./images/presenter.png"/>
           <h1 class="centerText"><%= title %></h1>
         </div>
         <div class="twoColumn">
@@ -22,7 +22,7 @@
           <div class="rightColumn">
             <!--右カラム-->
             <p><%- content %></p>
-            <p><a href="<%= link%>" title="戻る" class="link-button">戻る</a></p>
+            <p><a href="./<%= link%>" title="戻る" class="link-button">戻る</a></p>
           </div>
         </div>
       </div>

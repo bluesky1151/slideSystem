@@ -5,7 +5,7 @@ $(window).scroll(function() {
     //console.log(now/h *100);
     if(per >= 30){
         if(document.getElementById('TopScroll') == null){
-            $('body').after('<button type="button" title="ページ上部へ" id="TopScroll" onclick="toTop();"><img src="/images/arrow.png"/></button>');
+            $('body').after('<button type="button" title="ページ上部へ" id="TopScroll" onclick="toTop();"><img src="./images/arrow.png"/></button>');
         }
     }else{
         if(document.getElementById('TopScroll') != null){
