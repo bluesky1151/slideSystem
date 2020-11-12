@@ -142,7 +142,7 @@ router.post('/regist', isNotLogined, async function(req, res, next){
               res.render('blank', {
                 title: title + status,
                 content: content,
-                link: '/regist'
+                link: './regist'
               });
               }
             }else{
@@ -152,7 +152,7 @@ router.post('/regist', isNotLogined, async function(req, res, next){
               res.render('blank', {
                 title: title + status,
                 content: content,
-                link: '/regist'
+                link: './regist'
               });
             }
           }else{
@@ -162,7 +162,7 @@ router.post('/regist', isNotLogined, async function(req, res, next){
             res.render('blank', {
               title: title + status,
               content: content,
-              link: '/regist'
+              link: './regist'
             });
           }
       }else{
@@ -172,7 +172,7 @@ router.post('/regist', isNotLogined, async function(req, res, next){
         res.render('blank', {
           title: title + status,
           content: content,
-          link: '/regist'
+          link: './regist'
         });
       }
     }else{
@@ -182,7 +182,7 @@ router.post('/regist', isNotLogined, async function(req, res, next){
       res.render('blank', {
         title: title + status,
         content: content,
-        link: '/regist'
+        link: './regist'
       });
     }
   }else{
@@ -192,7 +192,7 @@ router.post('/regist', isNotLogined, async function(req, res, next){
     res.render('blank', {
       title: title + status,
       content: content,
-      link: '/regist'
+      link: './regist'
     });
   }
   
@@ -210,8 +210,8 @@ router.get('/login', isNotLogined, function(req, res, next){
 
 router.post('/login', isNotLogined, passport.authenticate('local',
   {
-    successRedirect: '/users/',
-    failureRedirect: '/login',
+    successRedirect: './users/',
+    failureRedirect: './login',
     session: true,
   }
 ));
