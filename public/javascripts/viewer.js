@@ -21,7 +21,7 @@ const statusList = [
     '演習完了', 'HELP!', '待った！', '🙋', ''
 ];
 
-const socket = io.connect();
+const socket = io.connect('http://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp', {path: "/slidesystem/socket.io"});
 //console.log(url);
 console.log(token);
 hljs.initHighlightingOnLoad();
