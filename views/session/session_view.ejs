@@ -3,7 +3,7 @@
     <head>
         <title><%= title%></title>
         <link rel="stylesheet" type="text/css" href="http://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/stylesheets/session.css">
-        <script src="/socket.io/socket.io.js"></script>
+        <script src="./socket.io/socket.io.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -11,7 +11,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
         <script src="http://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/javascripts/pdf.js"></script>
         <script>
-            let url = "<%= url%>";
+            let url = "http://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/<%= url%>";
             let sesId = "<%= sesId%>";
             let viewDoc_text = "<%- viewDoc%>"
             let uid = "<%= uData.id%>";
