@@ -32,6 +32,7 @@ let connection = mysql.createConnection(mysql_setting);
 
 //socket
 var io = require('socket.io')(server);
+io.path("/slidesystem");
 io.on('connection', function(socket){
   //console.log('connected!!!');
 
