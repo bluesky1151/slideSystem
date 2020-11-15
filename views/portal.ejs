@@ -2,15 +2,15 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='http://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/stylesheets/style.css' />
-    <link rel="shortcut icon" href="http://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/images/favicon.ico" />
+    <link rel='stylesheet' href='//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/stylesheets/style.css' />
+    <link rel="shortcut icon" href="//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/images/favicon.ico" />
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   </head>
   <body>
     <div class="wrap">
       <div class="content">
         <div class="text-image" id="header">
-          <img src="http://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/images/presenter.png"/>
+          <img src="//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/images/presenter.png"/>
           <h1 class="centerText"><%= title %></h1>
         </div>
         <div class="twoColumn">
@@ -68,7 +68,7 @@
               <tr>
                 <td><%= mysession[i].id%></td>
                 <td><%= mysession[i].session_name%></td>
-                <td><a href="http://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/users/session/view/<%= mysession[i].id%>">http://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/users/session/view/<%= mysession[i].id%></a></td>
+                <td><a href="//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/users/session/view/<%= mysession[i].id%>">//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/users/session/view/<%= mysession[i].id%></a></td>
                 <td><a href="./edit/<%= mysession[i].id%>" class="link-button">編集</td>
                 <td><a href="./session/show/<%= mysession[i].id%>" class="link-button">開催</td>
                 <td><a href="./delete/<%= mysession[i].id%>" class="link-button" onclick="if(confirm('削除すると復旧できません. 本当に削除しますか？') == false) return false;">削除</a></td>
