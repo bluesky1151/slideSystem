@@ -8,7 +8,7 @@ let SorcePage = "../viewSorce/" + sesId;
 let pageProgress;
 let joining;
 let Exercising = false;
-const socket = io.connect('http://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp', {path: "/slidesystem/socket.io"});
+const socket = io.connect(location.protocol + '//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp', {path: "/slidesystem/socket.io"});
 
 
 const emoteList = [
