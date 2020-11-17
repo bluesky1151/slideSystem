@@ -11,7 +11,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
         <script src="//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/javascripts/pdf.js"></script>
         <script>
-            let url = location.protocol + "//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/<%= url%>";
+            let url = location.protocol + "//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem<%= url%>";
             let sesId = "<%= sesId%>";
             let viewDoc_text = "<%- viewDoc%>"
             let uid = "<%= uData.id%>";
@@ -55,6 +55,7 @@
             <div class="document">
                 <p>関連資料</p>
                 <p id="viewDoc"></p>
+                <p><a href="//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem<%= url%>" title="ダウンロード">PDFのダウンロード</a></p>
             </div>
             <div class="anything">
                 <button class="anything_button_on" id="viewing_tab" onclick="changeTabs(1)">参加者</button><button id="bookmark_tab" class="anything_button_off" onclick="changeTabs(2)">ブックマークリスト</button>
