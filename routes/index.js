@@ -24,9 +24,6 @@ let mysql_setting = {
 router.get('/', isNotLogined ,function(req, res, next) {
   let remoteAddress = req.connection.remoteAddress;
   console.log(remoteAddress + ': アクセス->トップページ');
-  if(req.protocol == "http"){
-    res.redirect("https://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/");
-  }
   res.render('index', {
     title: title
   });
