@@ -3,6 +3,12 @@ let pdfObj;
 let loadingTask;
 let max;
 let nowPage;
+let timerSwitch;
+let timerReset;
+let countSecID;
+let timeField;
+let timerFlag = 1;
+let second = 0;
 let scale = 1;
 let SorcePage = "../viewSorce/" + sesId;
 let pageProgress;
@@ -145,6 +151,9 @@ document.addEventListener('keydown', function(event){
 window.onload = async function(){
     let viewDoc = document.getElementById('viewDoc');
     let viewDocCont = replace_url(nl2br(escape_html(decodeURI(viewDoc_text))));
+    timerReset = document.getElementById("timerReset");
+    timerSwitch = document.getElementById("timerSwitch");
+    timeField = document.getElementById("time");
     pageProgress = document.getElementById('pageProgress');
     joining = document.getElementById('joining');
     //url = document.getElementById('pptx').value;
@@ -304,4 +313,42 @@ function reloadViewer(){
 function deleteState(id){
     //console.log(id);
     socket.emit('deleteStatus', {sesId: sesId, actor: uid, statusId: id})
+}
+function timerToggler(selector){
+    //console.log(timerFlag, selector);
+    if(timerFlag == 1 && selector == 1){
+        timeField.innerText = "00:00:00";
+        $("#timerField").fadeIn(300);
+        timerFlag = 0;
+    }
+    if(selector){
+        countSecID =setInterval(countSecond, 1000);
+        timerSwitch.innerText = "ストップ";
+        timerSwitch.setAttribute('onclick', "timerToggler(0)");
+    }else{
+        clearInterval(countSecID);
+        timerSwitch.innerText = "スタート";
+        timerSwitch.setAttribute('onclick', "timerToggler(1)");
+    }
+}
+function timerResetFunc(){
+    second = 0;
+    let result = SecFormatter(second);
+    timeField.innerText = result.H + ":" + result.M + ":" + result.S;
+}
+function countSecond(){
+    second++;
+    let result = SecFormatter(second);
+    timeField.innerText = result.H + ":" + result.M + ":" + result.S;
+}
+function SecFormatter(sec){
+    let hour = 0; let min = 0; let seco = 0;
+    seco = sec % 60;
+    min = Math.floor(sec / 60);
+    hour = Math.floor(min / 60);
+    min %= 60;
+    return {H: zeroPadding(hour, 2), M: zeroPadding(min, 2), S: zeroPadding(seco, 2)};
+}
+function zeroPadding(NUM, LEN){
+	return ( Array(LEN).join('0') + NUM ).slice( -LEN );
 }

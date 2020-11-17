@@ -404,8 +404,7 @@ router.post('/session/bookmarkList/:ID',isLogined, async function(req, res, next
 module.exports = router;
 
 async function isLogined(req, res, next){
-  let host = req.get('Host');
-  let url = req.protocol + '://' + host;
+  let url = "https://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/";
 
   if(req.session.passport != undefined){
     if(req.session.passport.user != undefined){

@@ -47,7 +47,12 @@
         <div class="ProgressLine"><progress id="pageProgress" value="1"></progress></div>
         <div class="line2">
             <!--操作ボタン-->
-            <p><span id="Changebutton"><button class="link-button" onclick="pageChange(1)">◀</button><button class="link-button" onclick="pageChange(2)">▶</button></span>　<span id="nowPage"></span> / <span id="maxPage"></span> <button class="link-button" onclick="reloadPDF()">スライドの更新</button></p>
+            <p>
+                <span id="Changebutton"><button class="link-button" onclick="pageChange(1)">◀</button><button class="link-button" onclick="pageChange(2)">▶</button></span>
+                <span id="nowPage"></span> / <span id="maxPage"></span>
+                <button class="link-button" onclick="reloadPDF()">スライドの更新</button>
+                <span id="timerField" style="display: none;">経過時間: <span id="time"></span></span>
+            </p>
         </div>
         <div class="line3">
             <div class="consoleBox">
@@ -55,7 +60,11 @@
                 <p>コンソールボックス</p>
                 <div class="consoleBox2">
                     <!--内容-->
-                    <button class="link-button" id="toOnline" onclick="Toonline()">セッション開催</button><button class="link-button" id="StartExe" onclick="StartExe()">演習開始</button>
+                    <button class="link-button" id="toOnline" onclick="Toonline()">セッション開催</button>
+                    <button class="link-button" id="StartExe" onclick="StartExe()">演習開始</button><br>
+                    <p>タイマー</p>
+                    <button class="link-button" id="timerSwitch" onclick="timerToggler(1)">スタート</button>
+                    <button class="link-button" id="timerReset" onclick="timerResetFunc()">リセット</button>
                 </div>
             </div>
             <div class="document">

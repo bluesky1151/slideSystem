@@ -24,6 +24,9 @@ let mysql_setting = {
 router.get('/', isNotLogined ,function(req, res, next) {
   let remoteAddress = req.connection.remoteAddress;
   console.log(remoteAddress + ': アクセス->トップページ');
+  if(req.protocol == "http"){
+    res.redirect("https://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/");
+  }
   res.render('index', {
     title: title
   });
@@ -226,30 +229,8 @@ function isset(data) {
   }
 };
 
-async function isLogined(req, res, next){
-  let host = req.get('Host');
-  let url = req.protocol + '://' + host;
-
-  if(req.session.passport != undefined){
-    if(req.session.passport.user != undefined){
-      //DB LOOK
-      let data = await querySQL('SELECT id FROM account WHERE id=?', [req.session.passport.user]); data = data[0].id;
-      if(data){
-        next();
-      }else{
-        res.redirect(url);
-      }
-    }else{
-      res.redirect(url);
-    }
-  }else{
-    res.redirect(url);
-  }
-}
-
 async function isNotLogined(req, res, next){
-  let host = req.get('Host');
-  let url = req.protocol + '://' + host + '/users/';
+  let url = 'https://jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/users/';
   if(req.session.passport == undefined){
     next();
   }else{
