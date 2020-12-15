@@ -19,6 +19,7 @@
         </script>
         <script src="//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/javascripts/shower.js"></script>
         <link rel="shortcut icon" href="//jupiter.tntetsu-lab.cs.kanagawa-it.ac.jp/slidesystem/images/favicon.ico" />
+        <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
     </head>
     <body>
         <!--公開者側画面-->
@@ -34,7 +35,7 @@
             <div class="SourceViewer">
                 <pre class="sorce" style="text-align: left;"><code id="Sorce" ></code></pre><br>
                 <textarea id="Sorce2" style="display: none;"></textarea>
-                <button class="link-button" id="clipBoard" onclick="copyToClipboard()">クリップボードにコピー</button>
+                <button class="link-button" id="clipBoard" data-clipboard-target="#Sorce">クリップボードにコピー</button>
             </div>
             <div class="joiner">
                 <!--参加者一覧-->

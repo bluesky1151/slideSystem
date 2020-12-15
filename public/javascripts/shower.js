@@ -170,6 +170,7 @@ window.onload = async function(){
     writePDF();
     SorceData();
     viewDoc.innerHTML = viewDocCont;
+    new ClipboardJS('#clipBoard');
 }
 function reloadPDF(){
     writePDF();
@@ -231,16 +232,6 @@ function SorceData() {
             }
         }
     );
-}
-async function copyToClipboard(){
-    let Sorce = document.getElementById('Sorce2');
-    let range = document.createRange();
-    range.selectNodeContents(Sorce);
-    let selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
-    document.execCommand('Copy');
-    selection.removeAllRanges();
 }
 function trimComment(str) {
 	//                  コメント___________________ 文字列リテラル(")_______ 文字列リテラル(')_______ CDATA セクション________ 正規表現リテラル___________________________
